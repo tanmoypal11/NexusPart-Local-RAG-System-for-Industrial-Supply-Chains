@@ -1,165 +1,136 @@
-🛠️ NexusPart: Local RAG System for Industrial Supply Chains
-🚀 Project Overview
+# 🛠️ NexusPart: Local RAG System for Industrial Supply Chains
+
+## 🚀 Project Overview
 
 NexusPart is a fully local, GPU-accelerated Retrieval-Augmented Generation (RAG) system designed for industrial procurement and engineering teams.
 
 It performs semantic search over proprietary industrial parts data and generates explainable substitution recommendations using a locally deployed Large Language Model (LLM).
 
-The system ensures data privacy, engineering-grade reasoning, and low-latency AI responses — all without cloud dependency.
+The system ensures data privacy, engineering-grade reasoning, and low-latency AI responses — without cloud dependency.
 
-🏭 Problem Statement
+---
+
+## 🏭 Problem Statement
 
 Engineering and procurement teams often struggle to find safe substitute components during:
 
-Supply chain disruptions
-
-Part obsolescence
-
-Maintenance and repair operations
-
-Emergency procurement scenarios
+- Supply chain disruptions
+- Part obsolescence
+- Maintenance and repair operations
+- Emergency procurement scenarios
 
 Traditional keyword search fails to understand technical meaning and specification similarity.
 
-NexusPart solves this using semantic vector search + LLM-based reasoning.
+NexusPart solves this using semantic vector search combined with LLM-based reasoning.
 
-🧠 System Architecture
-Phase 1 — Data Intelligence
+---
 
-Load and audit industrial parts dataset
+## 🧠 System Architecture
 
-Perform EDA and missing value analysis
+### Phase 1 — Data Intelligence
+- Load and audit industrial parts dataset
+- Perform EDA and missing value analysis
+- Clean and normalize technical descriptions
+- Standardize measurement units
+- Create structured combined_text context field
 
-Clean and normalize technical descriptions
+### Phase 2 — Vector Search
+- Generate embeddings using Hugging Face (all-MiniLM-L6-v2)
+- Store vectors in ChromaDB (local persistent database)
+- Enable cosine similarity semantic retrieval
 
-Standardize measurement units
+### Phase 3 — RAG Pipeline
+1. User enters query
+2. Retrieve top-K similar parts
+3. Inject retrieved specs into LLM prompt
+4. Generate justified substitution explanation
 
-Create structured combined_text context field
+### Phase 4 — AI Dashboard
+- Built using Streamlit
+- Interactive query interface
+- Displays retrieved reference parts
+- Engineering-grade natural language analysis
 
-Phase 2 — Vector Search
+---
 
-Generate embeddings using Hugging Face (all-MiniLM-L6-v2)
+## ⚙️ Tech Stack
 
-Store vectors in ChromaDB (local persistent database)
+- LLM: Llama 3 (Ollama)
+- Vector Database: ChromaDB
+- Embeddings: Hugging Face Sentence Transformers
+- UI Framework: Streamlit
+- Language: Python
+- Acceleration: CUDA (GPU-enabled local inference)
 
-Enable cosine similarity semantic retrieval
+---
 
-Phase 3 — RAG Pipeline
+## 📊 Key Features
 
-User enters query
+- Fully local AI deployment (no cloud dependency)
+- Semantic search over technical specifications
+- Explainable substitution recommendations
+- Production-style RAG pipeline
+- Modular and reusable code structure
+- GPU-accelerated inference
+- Streamlit-based interactive dashboard
 
-Retrieve top-K similar parts
+---
 
-Inject retrieved specs into LLM prompt
+## 📈 Evaluation Metrics
 
-Generate justified substitution explanation
+- Retrieval relevance (Top-K similarity quality)
+- LLM reasoning and justification quality
+- Response latency
+- GPU utilization efficiency
+- End-to-end system integration completeness
 
-Phase 4 — AI Dashboard
+---
 
-Built using Streamlit
+## 📂 Dataset
 
-Interactive query interface
+- Source: Proprietary-style industrial parts data
+- Format: CSV
+- Contains technical descriptions and specifications
+- Requires preprocessing and normalization before embedding
 
-Displays retrieved reference parts
+### Preprocessing Includes:
+- Text normalization
+- Missing value handling
+- Noise removal
+- Context string generation for embedding
 
-Engineering-grade natural language analysis
+---
 
-⚙️ Tech Stack
+## 🖥️ Installation & Setup
 
-LLM: Llama 3 (via Ollama)
-
-Vector Database: ChromaDB
-
-Embeddings: Hugging Face Sentence Transformers
-
-UI Framework: Streamlit
-
-Language: Python
-
-Acceleration: CUDA (GPU-enabled local inference)
-
-📊 Key Features
-
-Fully local AI deployment (no cloud dependency)
-
-Semantic search over technical specifications
-
-Explainable substitution recommendations
-
-Production-style RAG pipeline
-
-Modular and reusable code structure
-
-GPU-accelerated inference
-
-Streamlit-based interactive dashboard
-
-📈 Evaluation Metrics
-
-Retrieval relevance (Top-K similarity quality)
-
-LLM reasoning and justification quality
-
-Response latency
-
-GPU utilization efficiency
-
-End-to-end system integration
-
-📂 Dataset
-
-Source: Proprietary-style industrial parts data
-
-Format: CSV
-
-Contains technical descriptions and specifications
-
-Requires preprocessing and normalization before embedding
-
-Preprocessing includes:
-
-Text normalization
-
-Missing value handling
-
-Noise removal
-
-Context string generation for embedding
-
-🖥️ Installation & Setup
-1️⃣ Clone Repository
+### 1️⃣ Clone Repository
 git clone https://github.com/your-username/NexusPart.git
 cd NexusPart
-2️⃣ Install Dependencies
+
+### 2️⃣ Install Dependencies
 pip install -r requirements.txt
 
 Main dependencies:
+- streamlit
+- chromadb
+- sentence-transformers
+- ollama
+- pandas
+- seaborn
+- numpy
 
-streamlit
-
-chromadb
-
-sentence-transformers
-
-ollama
-
-pandas
-
-seaborn
-
-numpy
-
-3️⃣ Start Ollama
-
-Install Ollama and pull Llama 3:
-
+### 3️⃣ Start Ollama
 ollama pull llama3:8b
 
-Verify GPU acceleration is enabled.
+Ensure GPU acceleration (CUDA/MPS) is enabled.
 
-4️⃣ Run Streamlit App
+### 4️⃣ Run Streamlit App
 streamlit run app.py
-🗂️ Project Structure
+
+---
+
+## 🗂️ Project Structure
+
 NexusPart/
 │
 ├── app.py                  # Home page
@@ -171,61 +142,60 @@ NexusPart/
 │   └── EDA.ipynb
 ├── nexus_part_db/          # ChromaDB persistent storage
 └── README.md
-🧪 Example Query
+
+---
+
+## 🧪 Example Query
+
 Need substitute for 1.6A ceramic fuse used in primary protection.
 
 System retrieves similar parts and generates:
+- Technical comparison
+- Spec-based justification
+- Safety warnings (if applicable)
 
-Technical comparison
+---
 
-Spec-based justification
+## 🎯 Business Impact
 
-Safety warnings (if applicable)
+- Reduces procurement decision time
+- Mitigates supply chain risk
+- Enhances engineering productivity
+- Enables safe and explainable AI recommendations
+- Protects proprietary data through local deployment
 
-🎯 Business Impact
+---
 
-Reduces procurement decision time
+## 📅 Development Timeline
 
-Mitigates supply chain risk
+Week 1:
+- Data cleaning & EDA
+- Embeddings & Vector DB setup
 
-Enhances engineering productivity
+Week 2:
+- LLM & RAG integration
+- Streamlit deployment
 
-Enables safe and explainable AI recommendations
+---
 
-Protects proprietary data through local deployment
+## 🧩 Future Improvements
 
-📅 Development Timeline
-Week	Task	Deliverable
-Week 1	Data cleaning & EDA	Cleaned dataset
-Week 1	Embeddings & Vector DB	Local index
-Week 2	RAG pipeline	Substitution reasoning
-Week 2	Streamlit deployment	Interactive AI tool
-🧩 Future Improvements
+- Confidence scoring system
+- Spec comparison table
+- Structured JSON output
+- Logging & monitoring
+- Multi-model benchmarking
+- Docker containerization
 
-Confidence scoring system
+---
 
-Spec comparison table
-
-Structured JSON output
-
-Logging & monitoring
-
-Multi-model benchmarking
-
-Docker containerization
-
-🏁 Final Outcome
+## 🏁 Final Outcome
 
 NexusPart demonstrates:
-
-Practical RAG implementation
-
-Local LLM deployment
-
-Industrial AI application
-
-MLOps workflow understanding
-
-End-to-end system integration
+- Practical RAG implementation
+- Local LLM deployment
+- Industrial AI application
+- MLOps workflow understanding
+- End-to-end system integration
 
 This project bridges Generative AI, Supply Chain Intelligence, and Industrial Engineering Decision Support.
